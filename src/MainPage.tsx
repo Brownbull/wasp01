@@ -1,7 +1,8 @@
-import type { FormEvent } from "react";
+import type { ChangeEvent, FormEvent } from "react";
 import type { Task } from "wasp/entities";
 import { 
   createTask, 
+  updateTask,
   getTasks, 
   useQuery } from "wasp/client/operations";
 
@@ -20,13 +21,28 @@ export const MainPage = () => {
 };
 
 const TaskView = ({ task }: { task: Task }) => {
+  const handleDoneChange = async (event: ChangeEvent<HTMLInputElement>) => {
+    try {
+      const id = task.id;
+      const isDone = event.target.checked;
+      await updateTask({ id, isDone });
+    } catch (err: any) {
+      window.alert("Error @TaskView : " + err.message);
+    }
+  };
+
   return (
     <div>
-      <input type="checkbox" id={String(task.id)} checked={task.isDone} />
+      <input
+        type="checkbox"
+        id={String(task.id)}
+        checked={task.isDone}
+        onChange={handleDoneChange}
+      />
       {task.description}
     </div>
   );
-};
+} 
 
 const TasksList = ({ tasks }: { tasks: Task[] }) => {
   if (!tasks?.length) return <div>No tasks</div>;

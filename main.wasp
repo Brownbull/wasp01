@@ -22,3 +22,8 @@ action createTask {
   fn: import { createTask } from "@src/actions",
   entities: [Task]
 }
+
+action updateTask {
+  fn: import { updateTask } from "@src/actions",
+  entities: [Task]
+}

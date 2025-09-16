@@ -1,5 +1,5 @@
 import type { Task } from "wasp/entities";
-import type { CreateTask } from "wasp/server/operations"
+import type { CreateTask, UpdateTask } from "wasp/server/operations"
 
 /**
  * Represents the payload required to create a new task.
@@ -22,3 +22,14 @@ export const createTask: CreateTask<CreateTaskPayload, Task> = async(
         data: { description: args.description },
     });
 };
+
+type UpdateTaskPayload = Pick<Task, "id" | "isDone">;
+export const updateTask: UpdateTask<UpdateTaskPayload, Task> = async(
+    { id, isDone },
+    context,
+) => {
+    return context.entities.Task.update({
+        where: { id },
+        data: { isDone: isDone },
+    });
+}
