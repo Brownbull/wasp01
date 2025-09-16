@@ -12,3 +12,8 @@ route RootRoute { path: "/", to: MainPage }
 page MainPage {
   component: import { MainPage } from "@src/MainPage"
 }
+
+query getTasks {
+  fn: import { getTasks } from "@src/queries",
+  entities: [Task]
+}
