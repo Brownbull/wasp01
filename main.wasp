@@ -17,3 +17,8 @@ query getTasks {
   fn: import { getTasks } from "@src/queries",
   entities: [Task]
 }
+
+action createTask {
+  fn: import { createTask } from "@src/actions",
+  entities: [Task]
+}
