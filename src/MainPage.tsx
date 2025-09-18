@@ -6,6 +6,7 @@ import {
   updateTask,
   getTasks, 
   useQuery } from "wasp/client/operations";
+import { logout } from "wasp/client/auth"
 
 export const MainPage = ({ user }: { user: AuthUser }) => {
   const { data: tasks, isLoading, error } = useQuery(getTasks, {});
@@ -17,6 +18,7 @@ export const MainPage = ({ user }: { user: AuthUser }) => {
       
       {isLoading && "Loading..."}
       {error && "Error: " + error}
+      <button onClick={logout}>Logout</button>
     </div>
   )
 };
