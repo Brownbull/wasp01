@@ -5,12 +5,30 @@ app initial {
   title: "initial",
   head: [
     "<link rel='icon' href='/favicon.ico' />",
-  ]
+  ],
+  auth: {
+    userEntity: User,
+    methods: {
+      usernameAndPassword: {}
+    },
+    onAuthFailedRedirectTo: "/login"
+  }
 }
 
 route RootRoute { path: "/", to: MainPage }
 page MainPage {
+  authRequired: true,
   component: import { MainPage } from "@src/MainPage"
+}
+
+route SignUpRoute { path: "/signup", to: SignUpPage }
+page SignUpPage {
+  component: import { SignUpPage } from "@src/SignUpPage"
+}
+
+route LoginRoute { path: "/login", to: LoginPage }
+page LoginPage {
+  component: import { LoginPage } from "@src/LoginPage"
 }
 
 query getTasks {

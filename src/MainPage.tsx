@@ -1,4 +1,5 @@
 import type { ChangeEvent, FormEvent } from "react";
+import type { AuthUser } from "wasp/auth"
 import type { Task } from "wasp/entities";
 import { 
   createTask, 
@@ -6,7 +7,7 @@ import {
   getTasks, 
   useQuery } from "wasp/client/operations";
 
-export const MainPage = () => {
+export const MainPage = ({ user }: { user: AuthUser }) => {
   const { data: tasks, isLoading, error } = useQuery(getTasks, {});
 
   return (
